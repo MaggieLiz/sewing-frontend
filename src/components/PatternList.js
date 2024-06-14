@@ -1,5 +1,6 @@
 // src/components/PatternList.js
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getPatterns, deletePattern } from '../services/api';
 
 const PatternList = () => {
@@ -28,13 +29,15 @@ const PatternList = () => {
   };
 
   return (
-    <div>
-      <h1>Sewing Patterns</h1>
-      <ul>
+    <div className="container">
+      <h2>Sewing Patterns</h2>
+      <ul className="list-group">
         {patterns.map((pattern) => (
-          <li key={pattern._id}>
-            {pattern.name} - {pattern.type} - {pattern.difficulty} - {pattern.size} - {pattern.fabricRequired}
-            <button onClick={() => handleDelete(pattern._id)}>Delete</button>
+          <li key={pattern._id} className="list-group-item d-flex justify-content-between align-items-center">
+            <Link to={`/patterns/${pattern._id}`}>
+              {pattern.name} - {pattern.type} - {pattern.difficulty} - {pattern.size} - {pattern.fabricRequired}
+            </Link>
+            <button className="btn btn-danger btn-sm" onClick={() => handleDelete(pattern._id)}>Delete</button>
           </li>
         ))}
       </ul>
